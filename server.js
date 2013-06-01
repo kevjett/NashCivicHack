@@ -1,9 +1,15 @@
 var express = require('express'),
-	host = express();
+	host = express(),
+	data = require('./server/data');
+
 
 // Parse request JSON body
 host.use(express.bodyParser());
 
+
+host.get('/data', data.findAll);
+host.get('/data/:id', data.findById);
+host.get('/data/:column/:search', data.findBySearch);
 
 
 // serve static files
