@@ -1,10 +1,16 @@
 'use strict';
 
-angular.module('NashCivicHackApp')
-  .controller('MainCtrl', ['$scope', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  }]);
+var app = angular.module('NashCivicHackApp');
+
+app.controller({
+
+	MainCtrl: [
+		'$scope',
+		function ($scope) {
+		
+
+
+		}
+	]
+
+});
