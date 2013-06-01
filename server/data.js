@@ -16,7 +16,7 @@ var getProp = function(obj,prop){
 };
 
 var returnList = function(list) {
-	return { total: list.length, list: list };
+	return { total: list.length, list: list, success: true, code:200 };
 };
 
 exports.findAll = function(req, res) {

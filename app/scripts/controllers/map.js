@@ -1,23 +1,6 @@
 'use strict';
 angular.module('NashCivicHackApp')
   .controller('MapsCtrl', ['$scope','$timeout','$log','$http','$routeParams', function ($scope, $timeout, $log, $http,$routeParams) {
-
-  	$http({method: 'GET', url: '/data/' + $routeParams.id}).
-	  success(function(data, status, headers, config) {
-	    console.log('success');
-	    console.log(data);
-	    $scope.markersProperty.push({
-				latitude: 36.08693,
-				longitude: -86.874055
-			},{
-				latitude: 36.149862,
-				longitude: -86.813458
-			});
-	  }).
-	  error(function(data, status, headers, config) {
-	    console.log('fail');
-	  });
-
 	// Enable the new Google Maps visuals until it gets enabled by default.
     // See http://googlegeodevelopers.blogspot.ca/2013/05/a-fresh-new-look-for-maps-api-for-all.html
 	google.maps.visualRefresh = true;
@@ -58,11 +41,167 @@ angular.module('NashCivicHackApp')
 		eventsProperty: {
 		  click: function (mapModel, eventName, originalEventArgs) {	
 		    // 'this' is the directive's scope
-		    $log.log("user defined event on map directive with scope", this);
-		    $log.log("user defined event: " + eventName, mapModel, originalEventArgs);
+		    console.log("user defined event on map directive with scope", this);
+		    console.log("user defined event: " + eventName, mapModel, originalEventArgs);
 		  }
 		}
 	});
 
+	var getProp = function(obj,prop){
+	  prop = (prop + "").toLowerCase();
+	  for(var p in obj){
+	     if(obj.hasOwnProperty(p) && prop == (p+ "").toLowerCase()){
+	     	if (obj[p] == null || obj[p] == '')
+	     		return null;
+	     	return obj[p];
+	      }
+	   }
+	   return undefined;
+	};
 
+	var searchurl = function(col,search) {
+		return "/#/maps?col=" + escape(col) + "&search=" + escape(search);
+	};
+
+	var checkMore = function(search,col,list) {
+
+		if (list == null)
+			return '';
+
+		var count = 0;
+		for(var i = 0; i<list.length;i++) {
+			var prop = getProp(list[i],col);
+			if (prop == null || prop.toLowerCase() != search.toLowerCase()) continue;
+			count++;
+		}
+
+		if (count<2) {
+			return '';
+		}
+
+		return '(<a href="' + searchurl(col,search) + '">' + count + '</a>)';
+	};
+
+	var addPoint = function(item,list) {
+		if (!item.Latitude || !item.Longitude){
+    		return;
+    	}
+
+    	var content = [];
+
+    	var title = getProp(item,"Title");
+    	if (title != null) {
+    		content.push('<div style="font-weight:bold;font-size:1.3em;">' + title + "</div>");
+    	}
+
+    	var subject = getProp(item,"Subject");
+    	if (subject != null) {
+    		content.push('<div style="font-size:0.9em;"><i>' + subject + "</i></div>");
+    	}
+
+    	var location = getProp(item,"Location");
+    	if (location != null) {
+    		content.push('<div><strong>Location: </strong>' + location + ' ' + checkMore(location,'Location',list) + '</div>');
+    	}
+
+    	var type = getProp(item,"Type");
+    	if (type != null) {
+    		content.push('<div><strong>Type: </strong><a href="' + searchurl('Type',type) + '">' + type + '</a></div>');
+    	}
+
+    	var medium = getProp(item,"Medium");
+    	if (medium != null) {
+    		content.push('<div><strong>Medium: </strong><a href="' + searchurl('Medium',medium) + '">' + medium + '</a></div>');
+    	}
+
+    	var artist = getProp(item,"Artist(s)");
+    	if (artist != null) {
+    		content.push('<div><strong>Artist(s): </strong><a href="' + searchurl('Artist(s)',artist) + '">' + artist + '</a></div>');
+    	}
+
+    	var owner = getProp(item,"Owner");
+    	if (owner != null) {
+    		content.push('<div><strong>Owner: </strong><a href="' + searchurl('Owner',owner) + '">' + owner + '</a></div>');
+    	}
+
+    	var remarks = getProp(item,"Remarks");
+    	if (remarks != null) {
+    		content.push('<div><strong>Remarks: </strong>' + remarks + '</div>');
+    	}
+
+    	content.push('<div><a href="https://maps.google.com/maps?saddr=Current+Location&daddr=' + item.Latitude + ',' + item.Longitude + '">Get Directions</a></div>')
+
+
+    	$scope.markersProperty.push({
+			latitude: parseFloat(item.Latitude),
+			longitude: parseFloat(item.Longitude),
+			infoWindow: content.join('')
+		});	
+		console.log({
+			latitude: parseFloat(item.Latitude),
+			longitude: parseFloat(item.Longitude)
+		});
+	};
+
+	if ($routeParams.id != null) {
+		$http({method: 'GET', url: '/data/' + $routeParams.id}).
+		  success(function(data, status, headers, config) {
+		    console.log('success');
+		    console.log(data);
+		    
+		    if (data.success == null || data.success == false){
+		    	alert(data.error);
+		    	return;
+		    }
+
+		    addPoint(data);
+
+		    if (!data.Latitude || !data.Longitude){
+		    	alert('Item does not have coordinates.');
+		    	return;
+		    }
+
+			$scope.position.coords = $scope.markersProperty[0];	
+		  });
+	} else if ($routeParams.col != null && $routeParams.search != null) {
+		$http({method: 'GET', url: '/data/' + $routeParams.col + '/' + $routeParams.search }).
+		  success(function(data, status, headers, config) {
+		    console.log('success');
+		    console.log(data);
+		    
+		    if (data.success == null || data.success == false){
+		    	alert(data.error);
+		    	return;
+		    }
+
+		    for(var i = 0;i < data.list.length;i++) {
+		    	var item = data.list[i];
+		    	addPoint(item,data.list);
+		    }
+
+		    if ($scope.markersProperty.length == 1)
+				$scope.position.coords = $scope.markersProperty[0];
+		  });
+	} else {
+		$http({method: 'GET', url: '/data'}).
+		  success(function(data, status, headers, config) {
+		    console.log('success');
+		    console.log(data);
+		    
+		    if (data.success == null || data.success == false){
+		    	alert(data.error);
+		    	return;
+		    }
+
+		    for(var i = 0;i < data.list.length;i++) {
+		    	var item = data.list[i];
+		    	addPoint(item,data.list);
+		    }
+
+		    if ($scope.markersProperty.length == 1)
+				$scope.position.coords = $scope.markersProperty[0];
+		  });
+	}
+
+  	
   }]);
