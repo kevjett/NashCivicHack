@@ -15,5 +15,5 @@ host.get('/data/:column/:search', data.findBySearch);
 // serve static files
 host.use(express.static(__dirname + '/app'));
 
-host.listen(5000);
-console.log('Server running at http://localhoat:5000/');
+host.listen(8081);
+console.log('Server running at http://localhoat:8081/');
