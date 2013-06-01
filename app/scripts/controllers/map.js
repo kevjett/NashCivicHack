@@ -1,12 +1,15 @@
 'use strict';
 angular.module('NashCivicHackApp')
   .controller('MapsCtrl', ['$scope','$timeout','$log','$http', function ($scope, $timeout, $log, $http) {
-  	debugger;
+
   	$http({method: 'GET', url: '/data/130'}).
 	  success(function(data, status, headers, config) {
 	    console.log('success');
 	    console.log(data);
-
+	    $scope.markersProperty.push({
+				latitude: 36.149862,
+				longitude: -86.813458
+			});
 	  }).
 	  error(function(data, status, headers, config) {
 	    console.log('fail');
@@ -35,7 +38,8 @@ angular.module('NashCivicHackApp')
 		zoomProperty: 14,
 		
 		/** list of markers to put in the map */
-		markersProperty: [ {
+		markersProperty: [],
+		/* {
 				latitude: 36.149862,
 				longitude: -86.813458
 			},
@@ -47,7 +51,7 @@ angular.module('NashCivicHackApp')
 				latitude: 36.08693,
 				longitude: -86.874055
 			}],
-		
+		*/
 		// These 2 properties will be set when clicking on the map
 		clickedLatitudeProperty: null,	
 		clickedLongitudeProperty: null,
@@ -59,6 +63,7 @@ angular.module('NashCivicHackApp')
 		    $log.log("user defined event: " + eventName, mapModel, originalEventArgs);
 		  }
 		}
-		
 	});
+
+
   }]);
