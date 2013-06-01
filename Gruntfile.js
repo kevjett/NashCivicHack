@@ -14,6 +14,21 @@ module.exports = function (grunt) {
     dist: 'dist'
   };
 
+  var nodemonIgnoredFiles = [
+    'README.md',
+    'Gruntfile.js',
+    '/.git/',
+    '/node_modules/',
+    '/app/',
+    '/dist/',
+    '/test/',
+    '/temp/',
+    '/.tmp',
+    '/.sass-cache',
+    '*.txt',
+    '*.jade'
+  ];
+
   try {
     yeomanConfig.app = require('./component.json').appPath || yeomanConfig.app;
   } catch (e) {}
@@ -45,7 +60,7 @@ module.exports = function (grunt) {
     },
     connect: {
       options: {
-        port: 9000,
+        port: 8081,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost'
       },
@@ -70,6 +85,49 @@ module.exports = function (grunt) {
           }
         }
       }
+    },
+    concurrent: {
+      nodemon: {
+        options: {
+          logConcurrentOutput: true,
+        },
+        tasks: [
+          'nodemon:nodeInspector',
+          'nodemon:dev',
+          'open',
+          'watch'
+        ],
+      },
+      livereload: [
+        'coffee:dist',
+        'compass:server',
+        'livereload-start',
+        'connect:livereload'
+      ]
+    },
+    nodemon: {
+      dev: {
+        options: {
+          file: 'server.js',
+          args: ['development'],
+          watchedExtensions: [
+            'js',
+            'coffee'
+          ],
+          // nodemon watches the current directory recursively by default
+          // watchedFolders: ['.'],
+          debug: true,
+          delayTime: 1,
+          ignoredFiles: nodemonIgnoredFiles,
+        }
+      },
+      nodeInspector: {
+        options: {
+          file: 'node-inspector.js',
+          exec: 'node-inspector',
+          ignoredFiles: nodemonIgnoredFiles,
+        },
+      },
     },
     open: {
       server: {
@@ -127,7 +185,7 @@ module.exports = function (grunt) {
     compass: {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '.tmp/styles',
+        cssDir: '<%= yeoman.app %>/styles',
         imagesDir: '<%= yeoman.app %>/images',
         javascriptsDir: '<%= yeoman.app %>/scripts',
         fontsDir: '<%= yeoman.app %>/styles/fonts',
@@ -263,13 +321,8 @@ module.exports = function (grunt) {
   grunt.renameTask('regarde', 'watch');
 
   grunt.registerTask('server', [
-    'clean:server',
-    'coffee:dist',
-    'compass:server',
-    'livereload-start',
-    'connect:livereload',
-    'open',
-    'watch'
+    'concurrent:livereload',
+    'concurrent:nodemon'
   ]);
 
   grunt.registerTask('test', [
