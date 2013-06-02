@@ -28,7 +28,7 @@
 <script type="text/ng-template" id="views/schedule/commute">
 	<div class="commute">
 
-		<time>{{ step.start | date:'ha' }}</time>
+		<time>{{ step.start | date:'h:mm a' }}</time>
 
 		<div class="card">
 			{{ step.duration || 0 }} min. Commute
@@ -41,7 +41,7 @@
 <script type="text/ng-template" id="views/schedule/stop">
 	<div class="stop" data-ng-class="{ locked : step.locked }">
 
-		<time>{{ step.start | date:'ha' }}</time>
+		<time>{{ step.start | date:'h:mm a' }}</time>
 
 		<div class="card">
 			<h2>{{ step.title }}</h2>

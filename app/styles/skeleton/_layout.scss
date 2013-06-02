@@ -144,9 +144,8 @@ body {
 	&> li {
 		margin: 0;
 
-		i {
+		img {
 			display:block;
-			height: 80px;
 		}
 
 		&> a {
@@ -160,6 +159,7 @@ body {
 		 	color: #fff;
 		 	text-transform: uppercase;
 		 	margin-top: 1px;
+		 	padding: 4px;
 		 }
 	}
 }

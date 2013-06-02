@@ -1176,22 +1176,22 @@ body {
   margin: 0;
 }
 /* line 147, skeleton/_layout.scss */
-.plans > li i {
+.plans > li img {
   display: block;
-  height: 80px;
 }
-/* line 152, skeleton/_layout.scss */
+/* line 151, skeleton/_layout.scss */
 .plans > li > a {
   display: block;
   padding: 0;
   text-decoration: none;
 }
-/* line 158, skeleton/_layout.scss */
+/* line 157, skeleton/_layout.scss */
 .plans > li h2 {
   background-color: #333;
   color: #fff;
   text-transform: uppercase;
   margin-top: 1px;
+  padding: 4px;
 }
 
 /* line 167, skeleton/_layout.scss */
