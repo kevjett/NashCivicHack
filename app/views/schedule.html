@@ -21,7 +21,7 @@
 <div class="content">
 
 	<ol class="schedule">
-		<li data-ng-repeat="step in plan.steps" data-ng-include="'views/schedule/' + step.type" class="step"></li>
+		<li data-ng-repeat="step in plan.stops" data-ng-include="'views/schedule/' + step.type" class="step"></li>
 	</ol>	
 <div>
 
@@ -57,6 +57,12 @@
 					{{ step.location.title }}
 				</button>
 			</menu>
+
+			<ol>
+				<li data-ng-repeat="point in step.points">
+					{{ point.Title }}
+				</li>
+			</ol>
 		</div>
 	</div>
 </script>

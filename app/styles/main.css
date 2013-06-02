@@ -1191,20 +1191,21 @@ body {
   background-color: #333;
   color: #fff;
   text-transform: uppercase;
+  margin-top: 1px;
 }
 
-/* line 166, skeleton/_layout.scss */
+/* line 167, skeleton/_layout.scss */
 .schedule {
   margin: 0;
   position: relative;
   height: 100%;
 }
-/* line 171, skeleton/_layout.scss */
+/* line 172, skeleton/_layout.scss */
 .schedule > li {
   margin: 0;
   position: relative;
 }
-/* line 176, skeleton/_layout.scss */
+/* line 177, skeleton/_layout.scss */
 .schedule:before {
   content: '';
   display: block;
@@ -1215,14 +1216,14 @@ body {
   border-left: 2px solid rgba(0, 0, 0, 0.05);
 }
 
-/* line 190, skeleton/_layout.scss */
+/* line 191, skeleton/_layout.scss */
 .commute .card,
 .stop .card {
   margin-left: 40px;
   border-left: 2px solid #ccc;
   padding: 6px;
 }
-/* line 196, skeleton/_layout.scss */
+/* line 197, skeleton/_layout.scss */
 .commute > time,
 .stop > time {
   font-family: Ubuntu Condensed, Ubuntu, sans-serif;
@@ -1237,31 +1238,31 @@ body {
   font-weight: bold;
 }
 
-/* line 212, skeleton/_layout.scss */
+/* line 213, skeleton/_layout.scss */
 .stop .card {
   border-color: #a0cf67;
   background-color: #f4f4f4;
 }
-/* line 220, skeleton/_layout.scss */
+/* line 221, skeleton/_layout.scss */
 .stop.locked .card {
   border-color: #c00;
 }
-/* line 225, skeleton/_layout.scss */
+/* line 226, skeleton/_layout.scss */
 .stop h2 {
   font-weight: 500;
   margin-bottom: 0;
 }
-/* line 230, skeleton/_layout.scss */
+/* line 231, skeleton/_layout.scss */
 .stop p {
   color: #999;
   font-size: 0.8em;
   margin-top: 0;
 }
-/* line 236, skeleton/_layout.scss */
+/* line 237, skeleton/_layout.scss */
 .stop menu {
   display: block;
 }
-/* line 241, skeleton/_layout.scss */
+/* line 242, skeleton/_layout.scss */
 .stop menu button,
 .stop menu button:hover,
 .stop menu button:active {
@@ -1269,7 +1270,7 @@ body {
   font-size: 12px;
 }
 
-/* line 250, skeleton/_layout.scss */
+/* line 251, skeleton/_layout.scss */
 .commute .card {
   text-align: center;
   border-color: #ffd24f;
@@ -1283,12 +1284,12 @@ body {
 /* Tablet Portrait size to standard 960 (devices and browsers) */
 /* All Mobile Sizes (devices and browser) */
 @media only screen and (max-width: 767px) {
-  /* line 271, skeleton/_layout.scss */
+  /* line 272, skeleton/_layout.scss */
   .panels {
     overflow-x: scroll;
   }
 
-  /* line 275, skeleton/_layout.scss */
+  /* line 276, skeleton/_layout.scss */
   .panel {
     position: absolute;
     width: 100%;
@@ -1296,12 +1297,12 @@ body {
     left: 0;
   }
 
-  /* line 281, skeleton/_layout.scss */
+  /* line 282, skeleton/_layout.scss */
   .panel-main {
     left: 100%;
   }
 
-  /* line 284, skeleton/_layout.scss */
+  /* line 285, skeleton/_layout.scss */
   .panel-detail {
     left: 200%;
   }
