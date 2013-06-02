@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500|Ubuntu+Condensed);
 /*
 * Skeleton V1.2
 * Copyright 2011, Dave Gamache
@@ -56,7 +57,7 @@ table {
 /* line 40, skeleton/_base.scss */
 body {
   background: #fff;
-  font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 13px/21px Ubuntu, "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #444;
   -webkit-font-smoothing: antialiased;
   /* Fix for webkit rendering */
@@ -282,12 +283,24 @@ img.scale-with-grid {
 
 /* #Buttons
 ================================================== */
-/* line 127, skeleton/_base.scss */
-.button,
-button,
-input[type="submit"],
-input[type="reset"],
-input[type="button"] {
+/* line 123, skeleton/_base.scss */
+button {
+  color: inherit;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 4px;
+  border-radius: 3px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: inherit;
+  margin: 0;
+  line-height: normal;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* line 138, skeleton/_base.scss */
+.button {
   background: #eee;
   background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%);
   /* FF3.6+ */
@@ -320,37 +333,24 @@ input[type="button"] {
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* line 158, skeleton/_base.scss */
-.button:hover,
-button:hover,
-input[type="submit"]:hover,
-input[type="reset"]:hover,
-input[type="button"]:hover {
+/* line 165, skeleton/_base.scss */
+.button:hover {
   color: #222;
   background: #ddd;
-  /* Old browsers */
   border: 1px solid #888;
   border-top: 1px solid #aaa;
   border-left: 1px solid #aaa;
 }
 
-/* line 170, skeleton/_base.scss */
-.button:active,
-button:active,
-input[type="submit"]:active,
-input[type="reset"]:active,
-input[type="button"]:active {
+/* line 173, skeleton/_base.scss */
+.button:active {
   border: 1px solid #666;
   background: #ccc;
   /* Old browsers */
 }
 
-/* line 178, skeleton/_base.scss */
-.button.full-width,
-button.full-width,
-input[type="submit"].full-width,
-input[type="reset"].full-width,
-input[type="button"].full-width {
+/* line 177, skeleton/_base.scss */
+.button.full-width {
   width: 100%;
   padding-left: 0 !important;
   padding-right: 0 !important;
@@ -358,7 +358,7 @@ input[type="button"].full-width {
 }
 
 /* Fix for odd Mozilla border & padding issues */
-/* line 186, skeleton/_base.scss */
+/* line 185, skeleton/_base.scss */
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
@@ -367,17 +367,17 @@ input::-moz-focus-inner {
 
 /* #Forms
 ================================================== */
-/* line 195, skeleton/_base.scss */
+/* line 194, skeleton/_base.scss */
 form {
   margin-bottom: 20px;
 }
 
-/* line 197, skeleton/_base.scss */
+/* line 196, skeleton/_base.scss */
 fieldset {
   margin-bottom: 20px;
 }
 
-/* line 203, skeleton/_base.scss */
+/* line 202, skeleton/_base.scss */
 input[type="text"],
 input[type="password"],
 input[type="email"],
@@ -399,12 +399,12 @@ select {
   background: #fff;
 }
 
-/* line 218, skeleton/_base.scss */
+/* line 217, skeleton/_base.scss */
 select {
   padding: 0;
 }
 
-/* line 223, skeleton/_base.scss */
+/* line 222, skeleton/_base.scss */
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus,
@@ -416,12 +416,12 @@ textarea:focus {
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 }
 
-/* line 229, skeleton/_base.scss */
+/* line 228, skeleton/_base.scss */
 textarea {
   min-height: 60px;
 }
 
-/* line 232, skeleton/_base.scss */
+/* line 231, skeleton/_base.scss */
 label,
 legend {
   display: block;
@@ -429,17 +429,17 @@ legend {
   font-size: 13px;
 }
 
-/* line 236, skeleton/_base.scss */
+/* line 235, skeleton/_base.scss */
 select {
   width: 220px;
 }
 
-/* line 238, skeleton/_base.scss */
+/* line 237, skeleton/_base.scss */
 input[type="checkbox"] {
   display: inline;
 }
 
-/* line 241, skeleton/_base.scss */
+/* line 240, skeleton/_base.scss */
 label span,
 legend span {
   font-weight: normal;
@@ -449,17 +449,17 @@ legend span {
 
 /* #Misc
 ================================================== */
-/* line 248, skeleton/_base.scss */
+/* line 247, skeleton/_base.scss */
 .remove-bottom {
   margin-bottom: 0 !important;
 }
 
-/* line 249, skeleton/_base.scss */
+/* line 248, skeleton/_base.scss */
 .half-bottom {
   margin-bottom: 10px !important;
 }
 
-/* line 250, skeleton/_base.scss */
+/* line 249, skeleton/_base.scss */
 .add-bottom {
   margin-bottom: 20px !important;
 }
@@ -1049,26 +1049,32 @@ or wrap each row of columns in a <div class="row"> */
 html,
 body {
   height: 100%;
+  overflow: hidden;
 }
 
 /* line 26, skeleton/_layout.scss */
-.page,
-.google-map {
-  position: absolute;
+.page {
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
 }
 
-/* line 34, skeleton/_layout.scss */
+/* line 35, skeleton/_layout.scss */
+.google-map {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 40, skeleton/_layout.scss */
 .panels {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-/* line 40, skeleton/_layout.scss */
+/* line 46, skeleton/_layout.scss */
 .panel {
   position: absolute;
   top: 0;
@@ -1076,38 +1082,61 @@ body {
   background-color: #fff;
   box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.4);
 }
-/* line 47, skeleton/_layout.scss */
+/* line 53, skeleton/_layout.scss */
 .panel > header {
+  position: absolute;
+  top: 0;
+  height: 40px;
+  width: 100%;
+  box-sizing: border-box;
   background-color: #def;
   padding: 6px;
+  background-image: linear-gradient(to bottom, #5fcbfe 40%, #3ac0ff 100%);
 }
-/* line 51, skeleton/_layout.scss */
+/* line 65, skeleton/_layout.scss */
 .panel > header menu {
   float: right;
 }
-/* line 57, skeleton/_layout.scss */
+/* line 71, skeleton/_layout.scss */
 .panel > header h1,
 .panel > header menu,
 .panel > header button {
   margin: 0;
 }
-/* line 61, skeleton/_layout.scss */
+/* line 75, skeleton/_layout.scss */
 .panel > header h1 {
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
   text-align: center;
+  font-weight: 500;
+  line-height: 30px;
+  font-size: 18px;
 }
-/* line 66, skeleton/_layout.scss */
+/* line 83, skeleton/_layout.scss */
 .panel > header .abstract {
   float: left;
 }
-/* line 71, skeleton/_layout.scss */
+/* line 88, skeleton/_layout.scss */
 .panel > header:before, .panel > header:after {
   content: ' ';
   display: table;
   clear: both;
 }
+/* line 94, skeleton/_layout.scss */
+.panel > header ~ .content {
+  top: 40px;
+}
+/* line 100, skeleton/_layout.scss */
+.panel > .content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
 
-/* line 80, skeleton/_layout.scss */
+/* line 111, skeleton/_layout.scss */
 .panel-abstract {
   left: 0;
   width: 80px;
@@ -1115,14 +1144,14 @@ body {
   z-index: 0;
 }
 
-/* line 87, skeleton/_layout.scss */
+/* line 118, skeleton/_layout.scss */
 .panel-main {
   left: 80px;
   width: 400px;
   z-index: 1;
 }
 
-/* line 93, skeleton/_layout.scss */
+/* line 124, skeleton/_layout.scss */
 .panel-detail {
   left: 480px;
   right: 0;
@@ -1131,64 +1160,88 @@ body {
 
 /* #Page Styles
 ================================================== */
-/* line 104, skeleton/_layout.scss */
+/* line 135, skeleton/_layout.scss */
 .schedule {
   margin: 0;
+  position: relative;
+  height: 100%;
 }
-/* line 107, skeleton/_layout.scss */
+/* line 140, skeleton/_layout.scss */
 .schedule > li {
   margin: 0;
+  position: relative;
+}
+/* line 145, skeleton/_layout.scss */
+.schedule:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 40px;
+  border-left: 2px solid rgba(0, 0, 0, 0.05);
 }
 
-/* line 115, skeleton/_layout.scss */
+/* line 159, skeleton/_layout.scss */
 .commute .card,
 .stop .card {
-  margin-left: 50px;
+  margin-left: 40px;
   border-left: 2px solid #ccc;
   padding: 6px;
 }
-/* line 121, skeleton/_layout.scss */
+/* line 165, skeleton/_layout.scss */
 .commute > time,
 .stop > time {
+  font-family: Ubuntu Condensed, Ubuntu, sans-serif;
   position: absolute;
   left: 0;
-  width: 50px;
+  top: 0;
+  width: 40px;
+  box-sizing: border-box;
+  text-align: right;
   display: block;
-  padding: 6px;
+  padding: 8px;
+  font-weight: bold;
 }
 
-/* line 132, skeleton/_layout.scss */
+/* line 181, skeleton/_layout.scss */
 .stop .card {
-  border-color: #0c0;
+  border-color: #a0cf67;
   background-color: #f4f4f4;
 }
-/* line 140, skeleton/_layout.scss */
+/* line 189, skeleton/_layout.scss */
 .stop.locked .card {
   border-color: #c00;
 }
-/* line 145, skeleton/_layout.scss */
-.stop p {
-  color: #aaa;
-  font-size: 0.9em;
+/* line 194, skeleton/_layout.scss */
+.stop h2 {
+  font-weight: 500;
+  margin-bottom: 0;
 }
-/* line 150, skeleton/_layout.scss */
+/* line 199, skeleton/_layout.scss */
+.stop p {
+  color: #999;
+  font-size: 0.8em;
+  margin-top: 0;
+}
+/* line 205, skeleton/_layout.scss */
 .stop menu {
   display: block;
 }
-/* line 155, skeleton/_layout.scss */
+/* line 210, skeleton/_layout.scss */
 .stop menu button,
 .stop menu button:hover,
 .stop menu button:active {
-  border: 0 none;
-  background: transparent none;
+  color: #1574a1;
+  font-size: 12px;
 }
 
-/* line 164, skeleton/_layout.scss */
+/* line 219, skeleton/_layout.scss */
 .commute .card {
   text-align: center;
-  border-color: #ff0;
+  border-color: #ffd24f;
   color: #999;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 /* #Media Queries

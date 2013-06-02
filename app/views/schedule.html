@@ -4,6 +4,14 @@
 	<menu type="toolbar" class="abstract">
 		<button type="button">
 			<i class="icon-arrow-left"></i>
+			&lt;
+		</button>
+	</menu>
+
+	<menu type="toolbar" class="detail">
+		<button type="button">
+			<i class="icon-arrow-left"></i>
+			&gt;
 		</button>
 	</menu>
 
@@ -40,14 +48,14 @@
 			<p>{{ step.description }}</p>
 
 			<menu type="toolbar">
-				<a>
+				<button>
 					<i class="icon-clock"></i>
 					{{ step.duration }} min.
-				</a>
-				<a>
+				</button>
+				<button>
 					<i class="icon-location"></i>
 					{{ step.location.title }}
-				</a>
+				</button>
 			</menu>
 		</div>
 	</div>
