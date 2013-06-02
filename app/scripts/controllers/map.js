@@ -1,6 +1,6 @@
 'use strict';
 angular.module('NashCivicHackApp')
-  .controller('MapsCtrl', ['$scope','$timeout','$log','$http','$stateParams','Routing', function ($scope, $timeout, $log, $http,$stateParams,routing) {
+  .controller('MapsCtrl', ['$scope','$timeout','$log','$http','$stateParams','Schedules', function ($scope, $timeout, $log, $http,$stateParams,sch) {
 	// Enable the new Google Maps visuals until it gets enabled by default.
     // See http://googlegeodevelopers.blogspot.ca/2013/05/a-fresh-new-look-for-maps-api-for-all.html
 	google.maps.visualRefresh = true;
@@ -18,8 +18,8 @@ angular.module('NashCivicHackApp')
 	        longitude: -86.783333
 	      },
 	      destinationProperty: {
-	      	latitude: 36.125816,
-	      	longitude: -86.665735
+	        latitude: 36.166667,
+	        longitude: -86.783333
 	      },
 		
 		/** the initial zoom level of the map */
@@ -148,7 +148,7 @@ angular.module('NashCivicHackApp')
 
 	var addMapData = function(data) {
 		if (data.success == null || data.success == false){
-	    	alert(data.error);
+	    	alert(data.error);	
 	    	return;
 	    }
 
@@ -167,14 +167,15 @@ angular.module('NashCivicHackApp')
 		url = '/data/' + $stateParams.id;
 	} else if ($stateParams.col != null && $stateParams.search != null) {
 		url = '/data/' + $stateParams.col + '/' + $stateParams.search;
+	} else if ($stateParams.plan != null) {
+		url = '/data/' + sch.getPlanIds(+$stateParams.plan).join(',');
+		sch.getPlan(+$stateParams.plan,35,-86).then(function (response) {
+	  		console.log(response);
+	  	}); 
 	}
 
 	$http({method: 'GET', url: url }).
 	  success(function(data, status, headers, config) {
 	    addMapData(data);
 	  });
-
-  	//routing.getRoute(35,-86,[349,350]).then(function(response) { 
-  	//	console.log(response); 
-  	//});
 }]);

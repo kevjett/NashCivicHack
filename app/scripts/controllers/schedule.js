@@ -25,116 +25,87 @@ app.controller({
 
 app.service({
 
-	Schedules: [
+	Schedules: ['Routing',
 
-		function () {
+		function (routing) {
 
 			// title,duration,start,locked,location:title,commute:start;duration,
 			var plans = [
 				{
 					id: 1,
-					title: 'Art Tour',
-					duration: 300,
-					steps: [
-						{
-							type:'stop',
-							title: 'Nashville International Airport',
-							location: {
-								postal: 'Nashville International Airport',
-								longitude:'',
-								latitude:''
-							},
-							start: new Date(),
-							duration: 105,
-							locked:false,
-							points: [
-								{
-									title:'Dancing on Air',
-									description:'2 mobiles with color bent metal pieces.',
-									duration: 60
-								},
-								{
-									title: 'Airport Sun Project',
-									description:'Colorful panels along the truss system and ticketing lobby wall that change dependent upon sun and shadows.',
-									duration: 45
-								}
-							]
-						},
-						{
-							type:'commute',
-							title: 'Commute',
-							duration: 15
-						},
-						{
-							type:'stop',
-							title:'Scheduled Event',
-							description: '501 Commerce St, Nashville TN, 37203',
-							start: new Date(),
-							duration: 240,
-							locked:true,
-							location: {
-								title: 'Nashville Convention Center'
-							}
-						}
-						/*
-						{
-							id: 1,
-							title: 'Dancing on Air',
-							description:'2 mobiles with color bent metal pieces.',
-							start: new Date(),
-							duration: 60,
-							locked:true,
-							location: {
-								id:1,
-								title: 'Nashville International Airport'
-							},
-							commute:null
-						},
-						{
-							id: 2,
-							title: 'Airport Sun Project',
-							description:'Colorful panels along the truss system and ticketing lobby wall that change dependent upon sun and shadows.',
-							start: new Date(),
-							duration: 45,
-							locked:true,
-							location: {
-								id:2,
-								title: 'Nashville International Airport'
-							},
-							commute:null
-						},
-						{
-							id:3,
-							title:'Scheduled Event',
-							description: '501 Commerce St, Nashville TN, 37203',
-							start: new Date(),
-							duration: 240,
-							location: {
-								id:3,
-								title: 'Nashville Convention Center'
-							}
-							commute: {
-								duration: 15,
-								start: new Date()
-							}
-						}
-						*/
-					]
-				}
+					title: 'Downtown Tour',
+					artids: [131,130,129,7,165,167,168,169]
+				},
+				{
+					id: 2,
+					title: 'Park Tour',
+					artids: [170,305,265,243,407,308,406,239]
+				},
+				{
+					id: 3,
+					title: 'Bike Rack Tour',
+					artids: [314,315,316,317,318,319,320]
+				},
+				{
+					id: 4,
+					title: 'Foutains Tour',
+					artids: [250,345,364,377,395]
+				},
+				{
+					id: 5,
+					title: 'Cenntenial Tour',
+					artids: [1,12,134,136,137,138,274]
+				},
+				{
+					id: 6,
+					title: 'Church Tour',
+					artids: [215,216,255,203,217]
+				},
+				{
+					id: 7,
+					title: 'Vanderbilt Tour',
+					artids: [144,143,142,141,145,147,148,150]
+				},
+				{
+					id: 8,
+					title: 'Land Art Tour',
+					artids: [367,376,378,420]
+				},
 			];
 
 			return {
-
-				getPlan: function (id) {
+				getPlanIds: function(id) {
 					var idx = -1;
-					plans.some(function (index, item) {
+					plans.some(function (item, index) {
 						if (item.id === id) {
 							idx = index;
 							return true;
 						}
 						return false;
 					});
-					return plans[idx];
+
+					if (idx == -1)
+						return null;
+
+					return plans[idx].artids;
+				},
+
+				getPlan: function (id,lat,lng) {
+					var idx = -1;
+					plans.some(function (item, index) {
+						if (item.id === id) {
+							idx = index;
+							return true;
+						}
+						return false;
+					});
+
+					if (idx == -1)
+						return null;
+
+					return routing.getRoute(lat,lng,plans[idx].artids).then(function(response) { 
+				  		return angular.extend({}, plans[idx], response);
+				  	});
 				},
 
 				listPlans: function () {
