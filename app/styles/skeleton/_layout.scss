@@ -112,6 +112,36 @@ body {
 	}
 }
 
+.icon-clock,
+.icon-cal,
+.icon-point,
+.icon-pic,
+.icon-car,
+.icon-tickets {
+	background: url(../images/icon_sheet_1x.png) 0 0 no-repeat;
+	display:inline-block;
+	width: 20px;
+	height: 20px;
+}
+
+.icon-clock {
+	background-position: -98px -20px;
+	height: 12px;
+	width: 12px;
+}
+
+.icon-car {
+	background-position: -20px 0px;
+	width: 40px;
+	height: 14px;
+}
+
+.icon-tickets {
+	background-position: -68px 0px;
+	width: 25px;
+
+}
+
 .panel-abstract {
 	left: 0;
 	width: 200px;
