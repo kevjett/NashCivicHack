@@ -17,6 +17,7 @@ app.service({
 			var buildPlan = function(data) {
 				plan = { duration: 0, stops: [] };
 				var route = data.routes[0];
+				var date = new Date();
 				for (var i = 0; i < route.legs.length; i++) {
 					var leg = route.legs[i]
 					var communte = getCommute(leg);
@@ -26,6 +27,9 @@ app.service({
 					if (i != (route.legs.length - 1)) {
 						var stopindex = route.waypoint_order[i];
 						var stop = stops[stopindex];
+						stop.start = new Date(date.getTime());
+						stop.start.setMinutes(stop.start.getMinutes()+communte.duration);
+						date = stop.start;
 						plan.stops.push(stop);
 						plan.duration = plan.duration + stop.duration;
 					}
