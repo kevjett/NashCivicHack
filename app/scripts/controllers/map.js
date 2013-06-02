@@ -1,6 +1,6 @@
 'use strict';
 angular.module('NashCivicHackApp')
-  .controller('MapsCtrl', ['$scope','$timeout','$log','$http','$stateParams', function ($scope, $timeout, $log, $http,$stateParams) {
+  .controller('MapsCtrl', ['$scope','$timeout','$log','$http','$stateParams','Routing', function ($scope, $timeout, $log, $http,$stateParams,routing) {
 	// Enable the new Google Maps visuals until it gets enabled by default.
     // See http://googlegeodevelopers.blogspot.ca/2013/05/a-fresh-new-look-for-maps-api-for-all.html
 	google.maps.visualRefresh = true;
@@ -173,4 +173,8 @@ angular.module('NashCivicHackApp')
 	  success(function(data, status, headers, config) {
 	    addMapData(data);
 	  });
-  }]);
+
+  	//routing.getRoute(35,-86,[349,350]).then(function(response) { 
+  	//	console.log(response); 
+  	//});
+}]);
