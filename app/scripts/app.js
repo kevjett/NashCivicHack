@@ -15,12 +15,12 @@ app.config([
 				templateUrl: 'views/panels.html'
 			})
 			.state({
-				name:'app.dashboard',
+				name:'app.view',
 				url:'',
 				views: {
-					main: {
-						templateUrl: 'views/main.html',
-						controller: 'MainCtrl'
+					abstract: {
+						templateUrl: 'views/plans.html',
+						controller: 'PlansCtrl'
 					}
 				}
 			})
