@@ -9,7 +9,7 @@ app.controller({
 		'$scope', 'Schedules', '$q', '$stateParams',
 		function ($scope, Schedules, $q, $stateParams) {
 
-			$scope.plan = Schedules.getPlan(+$stateParams.id);
+			$scope.plan = Schedules.getPlan(+$stateParams.plan);
 
 		}
 	]

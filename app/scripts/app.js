@@ -26,7 +26,7 @@ app.config([
 			})
 			.state({
 				name:'app.schedule',
-				url:'/schedule/:id',
+				url:'/schedule/:plan?route',
 				views: {
 					main: {
 						templateUrl: 'views/schedule.html',
