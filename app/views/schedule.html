@@ -10,20 +10,45 @@
 	<h1>Schedule</h1>
 
 </header>
+<div class="content">
 
-<ol class="schedule">
-	<li data-ng-repeat="stop in plan.stops">
+	<ol class="schedule">
+		<li data-ng-repeat="step in plan.steps" data-ng-include="'views/schedule/' + step.type" class="step"></li>
+	</ol>	
+<div>
 
-		<time class="{{ stop.time | date:'iso' }}">{{ stop.time | date:'short' }}</time>
+<script type="text/ng-template" id="views/schedule/commute">
+	<div class="commute">
 
-		<menu type="toolbar">
-			<button><i class="icon-check"></i></button>
-			<button><i class="icon-cross"></i></button>
-		</menu>
+		<time>{{ step.start | date:'ha' }}</time>
 
 		<div class="card">
-				<h2>{{ stop.title }}</h2>
+			{{ step.duration || 0 }} min. Commute
+			<i class="icon-commute"></i>
 		</div>
+		
+	</div>
+</script>
 
-	</li>
-</ol>
+<script type="text/ng-template" id="views/schedule/stop">
+	<div class="stop" data-ng-class="{ locked : step.locked }">
+
+		<time>{{ step.start | date:'ha' }}</time>
+
+		<div class="card">
+			<h2>{{ step.title }}</h2>
+			<p>{{ step.description }}</p>
+
+			<menu type="toolbar">
+				<a>
+					<i class="icon-clock"></i>
+					{{ step.duration }} min.
+				</a>
+				<a>
+					<i class="icon-location"></i>
+					{{ step.location.title }}
+				</a>
+			</menu>
+		</div>
+	</div>
+</script>

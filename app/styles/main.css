@@ -79,32 +79,32 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 
 /* line 61, skeleton/_base.scss */
 h1 {
-  font-size: 16pt;
+  font-size: 18px;
 }
 
 /* line 62, skeleton/_base.scss */
 h2 {
-  font-size: 15pt;
+  font-size: 14px;
 }
 
 /* line 63, skeleton/_base.scss */
 h3 {
-  font-size: 14pt;
+  font-size: 14px;
 }
 
 /* line 64, skeleton/_base.scss */
 h4 {
-  font-size: 13pt;
+  font-size: 14px;
 }
 
 /* line 65, skeleton/_base.scss */
 h5 {
-  font-size: 12pt;
+  font-size: 14px;
 }
 
 /* line 66, skeleton/_base.scss */
 h6 {
-  font-size: 11pt;
+  font-size: 14px;
 }
 
 /* line 67, skeleton/_base.scss */
@@ -1092,17 +1092,22 @@ body {
   margin: 0;
 }
 /* line 61, skeleton/_layout.scss */
+.panel > header h1 {
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+/* line 66, skeleton/_layout.scss */
 .panel > header .abstract {
   float: left;
 }
-/* line 66, skeleton/_layout.scss */
+/* line 71, skeleton/_layout.scss */
 .panel > header:before, .panel > header:after {
   content: ' ';
   display: table;
   clear: both;
 }
 
-/* line 75, skeleton/_layout.scss */
+/* line 80, skeleton/_layout.scss */
 .panel-abstract {
   left: 0;
   width: 80px;
@@ -1110,25 +1115,80 @@ body {
   z-index: 0;
 }
 
-/* line 82, skeleton/_layout.scss */
+/* line 87, skeleton/_layout.scss */
 .panel-main {
   left: 80px;
-  width: 270px;
+  width: 400px;
   z-index: 1;
 }
 
-/* line 88, skeleton/_layout.scss */
+/* line 93, skeleton/_layout.scss */
 .panel-detail {
-  left: 350px;
+  left: 480px;
   right: 0;
   z-index: 3;
 }
 
 /* #Page Styles
 ================================================== */
-/* line 99, skeleton/_layout.scss */
+/* line 104, skeleton/_layout.scss */
 .schedule {
   margin: 0;
+}
+/* line 107, skeleton/_layout.scss */
+.schedule > li {
+  margin: 0;
+}
+
+/* line 115, skeleton/_layout.scss */
+.commute .card,
+.stop .card {
+  margin-left: 50px;
+  border-left: 2px solid #ccc;
+  padding: 6px;
+}
+/* line 121, skeleton/_layout.scss */
+.commute > time,
+.stop > time {
+  position: absolute;
+  left: 0;
+  width: 50px;
+  display: block;
+  padding: 6px;
+}
+
+/* line 132, skeleton/_layout.scss */
+.stop .card {
+  border-color: #0c0;
+  background-color: #f4f4f4;
+}
+/* line 140, skeleton/_layout.scss */
+.stop.locked .card {
+  border-color: #c00;
+}
+/* line 145, skeleton/_layout.scss */
+.stop p {
+  color: #aaa;
+  font-size: 0.9em;
+}
+/* line 150, skeleton/_layout.scss */
+.stop menu {
+  display: block;
+}
+/* line 155, skeleton/_layout.scss */
+.stop menu button,
+.stop menu button:hover,
+.stop menu button:active {
+  border: 0 none;
+  background: transparent none;
+}
+
+/* line 164, skeleton/_layout.scss */
+.commute .card {
+  text-align: center;
+  border-color: #ff0;
+  color: #999;
+  font-weight: bold;
 }
 
 /* #Media Queries
