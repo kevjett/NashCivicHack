@@ -37,6 +37,10 @@ body {
 	height: 100%;
 }
 
+.panel-tray {
+	position:absolute;
+}
+
 .panels {
 	position:relative;
 	width: 100%;
@@ -235,7 +239,28 @@ body {
 	@media only screen and (min-width: 768px) and (max-width: 959px) {}
 
 	/* All Mobile Sizes (devices and browser) */
-	@media only screen and (max-width: 767px) {}
+	@media only screen and (max-width: 767px) {
+
+		.panels {
+			overflow-x: scroll;
+		}
+
+		.panel {
+			position:absolute;
+			width: 100%;
+			height: 100%;
+			left:0;
+		}
+		.panel-main {
+			left: 100%;
+		}
+		.panel-detail {
+			left: 200%;
+		}
+
+
+
+	}
 
 	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
 	@media only screen and (min-width: 480px) and (max-width: 767px) {}
