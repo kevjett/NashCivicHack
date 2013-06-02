@@ -228,8 +228,6 @@
           google.maps.event.addListener(marker, 'click', function() {
             if (currentInfoWindow != null) {
               currentInfoWindow.close();
-              currentInfoWindow = null;
-              return;
             }
             infoWindow.open(_instance, marker);
             currentInfoWindow = infoWindow;

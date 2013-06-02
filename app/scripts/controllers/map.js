@@ -134,6 +134,9 @@ angular.module('NashCivicHackApp')
 	};
 
 	var addWaypoint = function(item) {
+		if (!item.Latitude || !item.Longitude)
+			return;
+		
 		if ($stateParams.route != null) {
     		if (!$scope.waypointsProperty) {
     			$scope.waypointsProperty = [];
