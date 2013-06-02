@@ -100,22 +100,22 @@ angular.module('NashCivicHackApp')
 
     	var type = getProp(item,"Type");
     	if (type != null) {
-    		content.push('<div><strong>Type: </strong><a href="' + searchurl('Type',type) + '">' + type + '</a></div>');
+    		content.push('<div><strong>Type: </strong>' + type + ' ' + checkMore(type,'Type',list) + '</div>');
     	}
 
     	var medium = getProp(item,"Medium");
     	if (medium != null) {
-    		content.push('<div><strong>Medium: </strong><a href="' + searchurl('Medium',medium) + '">' + medium + '</a></div>');
+    		content.push('<div><strong>Medium: </strong>' + medium + ' ' + checkMore(medium,'Medium',list) + '</div>');
     	}
 
     	var artist = getProp(item,"Artist(s)");
     	if (artist != null) {
-    		content.push('<div><strong>Artist(s): </strong><a href="' + searchurl('Artist(s)',artist) + '">' + artist + '</a></div>');
+    		content.push('<div><strong>Artist(s): </strong>' + artist + ' ' + checkMore(artist,'Artist(s)',list) + '</div>');
     	}
 
     	var owner = getProp(item,"Owner");
     	if (owner != null) {
-    		content.push('<div><strong>Owner: </strong><a href="' + searchurl('Owner',owner) + '">' + owner + '</a></div>');
+    		content.push('<div><strong>Owner: </strong>' + owner + ' ' + checkMore(owner,'Owner',list) + '</div>');
     	}
 
     	var remarks = getProp(item,"Remarks");
