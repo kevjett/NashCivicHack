@@ -29,13 +29,14 @@ app.service({
 						var stop = stops[stopindex];
 						stop.start = new Date(date.getTime());
 						stop.start.setMinutes(stop.start.getMinutes()+communte.duration);
-						date = stop.start;
+						date = new Date(stop.start.getTime());
+						date.setMinutes(date.getMinutes()+stop.duration);
 						plan.stops.push(stop);
 						plan.duration = plan.duration + stop.duration;
 					}
 				};
 				if (route.legs.length > 0) {
-					plan.stops.push(getStopObject('Back to Current Location',0));
+					plan.stops.push(getStopObject('Back to Current Location',0,date));
 				}
 			};
 
@@ -87,20 +88,20 @@ app.service({
 				return angular.extend({}, item, { duration: 20 });
 			};
 
-			var getStopObject = function(location, duration) {
+			var getStopObject = function(location, duration,start) {
 				return {
 					type: 'stop',
 					title: location,
 					duration: duration,
 					location: null,
-					start: new Date(),
+					start: start,
 					locked: false,
 					points: []
 				};
 			}
 
 			var parseStop = function(item) {
-				var s = getStopObject(item.Location,20);
+				var s = getStopObject(item.Location,20,new Date());
 				s.location = {
 					latitude: item.Latitude,
 					longitude: item.Longitude
