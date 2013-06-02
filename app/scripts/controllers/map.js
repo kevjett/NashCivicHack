@@ -154,7 +154,7 @@ angular.module('NashCivicHackApp')
 
 	    for(var i = 0;i < data.list.length;i++) {
 	    	var item = data.list[i];
-	    	addPoint(item,data.list);
+	    	addPoint(item,data.all);
 	    	addWaypoint(item);
 	    }
 
