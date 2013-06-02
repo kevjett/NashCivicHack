@@ -137,7 +137,6 @@ angular.module('NashCivicHackApp')
 		if (!item.Latitude || !item.Longitude)
 			return;
 
-		if ($stateParams.route != null) {
     		if (!$scope.waypointsProperty) {
     			$scope.waypointsProperty = [];
     		}
@@ -146,7 +145,6 @@ angular.module('NashCivicHackApp')
 				latitude: parseFloat(item.Latitude),
 				longitude: parseFloat(item.Longitude)
 			});	
-    	}
 	};
 
 	var addMapData = function(data) {
@@ -180,7 +178,6 @@ angular.module('NashCivicHackApp')
 	setTimeout(function () {
 		$http({method: 'GET', url: url }).
 		  success(function(data, status, headers, config) {
-		  	if ($stateParams.route != null) {
 		  		geo.getCurrentLocation().then(function(pos) {
 		  			$scope.originProperty = {
 				        latitude: pos.coords.latitude,
@@ -192,9 +189,6 @@ angular.module('NashCivicHackApp')
 				      };
 				      addMapData(data);
 		  		});
-		  	} else {
-			    addMapData(data);
-			}
 		  });
 	});
 }]);
