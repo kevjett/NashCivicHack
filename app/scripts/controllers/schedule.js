@@ -25,9 +25,9 @@ app.controller({
 
 app.service({
 
-	Schedules: ['Routing',
+	Schedules: ['Routing','Geolocation',
 
-		function (routing) {
+		function (routing,geo) {
 
 			// title,duration,start,locked,location:title,commute:start;duration,
 			var plans = [
@@ -85,7 +85,7 @@ app.service({
 					return plans[idx].artids;
 				},
 
-				getPlan: function (id,lat,lng) {
+				getPlan: function (id) {
 					var idx = -1;
 					plans.some(function (item, index) {
 						if (item.id === id) {
@@ -98,9 +98,13 @@ app.service({
 					if (idx == -1)
 						return null;
 
-					return routing.getRoute(lat,lng,plans[idx].artids).then(function(response) { 
-				  		return angular.extend({}, plans[idx], response);
-				  	});
+					return geo.getCurrentLocation().then(function (pos) {
+						return routing.getRoute(pos.coords.latitude,pos.coords.longitude,plans[idx].artids).then(function(response) { 
+					  		return angular.extend({}, plans[idx], response);
+					  	});
+					});
+
+					
 				},
 
 				listPlans: function () {

@@ -19,7 +19,7 @@ app.service({
 
 					var defer = $q.defer();
 
-					$window.navigator.geolocation.getCurrentLocation(function (position) {
+					$window.navigator.geolocation.getCurrentPosition(function (position) {
 						defer.resolve(position);
 						$rootScope.$apply();
 

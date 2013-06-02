@@ -1,6 +1,6 @@
 'use strict';
 angular.module('NashCivicHackApp')
-  .controller('MapsCtrl', ['$scope','$timeout','$log','$http','$stateParams','Schedules', function ($scope, $timeout, $log, $http,$stateParams,sch) {
+  .controller('MapsCtrl', ['$scope','$timeout','$log','$http','$stateParams','Schedules','Geolocation', function ($scope, $timeout, $log, $http,$stateParams,sch,geo) {
 	// Enable the new Google Maps visuals until it gets enabled by default.
     // See http://googlegeodevelopers.blogspot.ca/2013/05/a-fresh-new-look-for-maps-api-for-all.html
 	google.maps.visualRefresh = true;
@@ -136,7 +136,7 @@ angular.module('NashCivicHackApp')
 	var addWaypoint = function(item) {
 		if (!item.Latitude || !item.Longitude)
 			return;
-		
+
 		if ($stateParams.route != null) {
     		if (!$scope.waypointsProperty) {
     			$scope.waypointsProperty = [];
@@ -179,6 +179,20 @@ angular.module('NashCivicHackApp')
 
 	$http({method: 'GET', url: url }).
 	  success(function(data, status, headers, config) {
-	    addMapData(data);
+	  	if ($stateParams.route != null) {
+	  		geo.getCurrentLocation().then(function(pos) {
+	  			$scope.originProperty = {
+			        latitude: pos.coords.latitude,
+			        longitude: pos.coords.longitude
+			      };
+			      $scope.destinationProperty = {
+			        latitude: pos.coords.latitude,
+			        longitude: pos.coords.longitude
+			      };
+			      addMapData(data);
+	  		});
+	  	} else {
+		    addMapData(data);
+		}
 	  });
 }]);
