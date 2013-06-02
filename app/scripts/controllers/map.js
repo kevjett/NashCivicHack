@@ -177,22 +177,24 @@ angular.module('NashCivicHackApp')
 	  	}); 
 	}
 
-	$http({method: 'GET', url: url }).
-	  success(function(data, status, headers, config) {
-	  	if ($stateParams.route != null) {
-	  		geo.getCurrentLocation().then(function(pos) {
-	  			$scope.originProperty = {
-			        latitude: pos.coords.latitude,
-			        longitude: pos.coords.longitude
-			      };
-			      $scope.destinationProperty = {
-			        latitude: pos.coords.latitude,
-			        longitude: pos.coords.longitude
-			      };
-			      addMapData(data);
-	  		});
-	  	} else {
-		    addMapData(data);
-		}
-	  });
+	setTimeout(function () {
+		$http({method: 'GET', url: url }).
+		  success(function(data, status, headers, config) {
+		  	if ($stateParams.route != null) {
+		  		geo.getCurrentLocation().then(function(pos) {
+		  			$scope.originProperty = {
+				        latitude: pos.coords.latitude,
+				        longitude: pos.coords.longitude
+				      };
+				      $scope.destinationProperty = {
+				        latitude: pos.coords.latitude,
+				        longitude: pos.coords.longitude
+				      };
+				      addMapData(data);
+		  		});
+		  	} else {
+			    addMapData(data);
+			}
+		  });
+	});
 }]);
