@@ -270,24 +270,6 @@ body {
 	/* All Mobile Sizes (devices and browser) */
 	@media only screen and (max-width: 767px) {
 
-		.panels {
-			overflow-x: scroll;
-		}
-
-		.panel {
-			position:absolute;
-			width: 100%;
-			height: 100%;
-			left:0;
-		}
-		.panel-main {
-			left: 100%;
-		}
-		.panel-detail {
-			left: 200%;
-		}
-
-
 
 	}
 

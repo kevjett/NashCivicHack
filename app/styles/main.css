@@ -1284,30 +1284,6 @@ body {
 /* Smaller than standard 960 (devices and browsers) */
 /* Tablet Portrait size to standard 960 (devices and browsers) */
 /* All Mobile Sizes (devices and browser) */
-@media only screen and (max-width: 767px) {
-  /* line 273, skeleton/_layout.scss */
-  .panels {
-    overflow-x: scroll;
-  }
-
-  /* line 277, skeleton/_layout.scss */
-  .panel {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-  }
-
-  /* line 283, skeleton/_layout.scss */
-  .panel-main {
-    left: 100%;
-  }
-
-  /* line 286, skeleton/_layout.scss */
-  .panel-detail {
-    left: 200%;
-  }
-}
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 /* #Font-Face
