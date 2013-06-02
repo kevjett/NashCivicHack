@@ -26,7 +26,7 @@ app.config([
 			})
 			.state({
 				name:'app.schedule',
-				url:'/schedule',
+				url:'/schedule/:id',
 				views: {
 					main: {
 						templateUrl: 'views/schedule.html',
@@ -35,6 +35,10 @@ app.config([
 					detail: {
 						templateUrl: 'views/maps.html',
 						controller: 'MapsCtrl'
+					},
+					abstract: {
+						templateUrl: 'views/plans.html',
+						controller: 'PlansCtrl'
 					}
 				}
 			})

@@ -1144,21 +1144,21 @@ body {
 /* line 115, skeleton/_layout.scss */
 .panel-abstract {
   left: 0;
-  width: 80px;
-  background-color: #444;
+  width: 200px;
+  background-color: #eee;
   z-index: 0;
 }
 
 /* line 122, skeleton/_layout.scss */
 .panel-main {
-  left: 80px;
+  left: 200px;
   width: 400px;
   z-index: 1;
 }
 
 /* line 128, skeleton/_layout.scss */
 .panel-detail {
-  left: 480px;
+  left: 600px;
   right: 0;
   z-index: 3;
 }

@@ -6,17 +6,10 @@ app.controller({
 
 	ScheduleCtrl: [
 
-		'$scope', 'Schedules', '$q',
-		function ($scope, Schedules, $q) {
+		'$scope', 'Schedules', '$q', '$stateParams',
+		function ($scope, Schedules, $q, $stateParams) {
 
-			$scope.$watch('filter', function (filter) {
-
-				$scope.plans = $q.when(Schedules.listPlans())
-					.then(function (plans) {
-						$scope.plan = plans[0];
-					});
-				
-			});
+			$scope.plan = Schedules.getPlan($stateParams.id);
 
 		}
 	]

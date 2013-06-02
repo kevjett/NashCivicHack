@@ -1,0 +1,29 @@
+
+<header>
+
+	<menu type="toolbar" class="detail">
+		<button type="button">
+			<i class="icon-arrow-left"></i>
+			&gt;
+		</button>
+	</menu>
+
+	<h1>Excursion</h1>
+
+</header>
+<div class="content">
+
+	<ol class="plans">
+		<li data-ng-repeat="plan in plans" class="plan">
+			
+			<a data-ng-href="#/schedule/{{ plan.id }}" class='card'>
+				
+				<i class="plan-photo"></i>
+				<h2>{{ plan.title }}</h2>
+
+			</a>
+
+		</li>
+	</ol>
+
+<div>
