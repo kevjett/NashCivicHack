@@ -54,7 +54,13 @@
     var _defaults = { 
         zoom: 8,
         draggable: false,
-        container: null
+        container: null,
+        travelMode: google.maps.TravelMode.DRIVING,
+        unitSystem: google.maps.UnitSystem.IMPERIAL,
+        optimizeWaypoints: true,
+        provideRouteAlternatives: false,
+        avoidHighways: false,
+        avoidTolls: false
       };
     
     /**
@@ -63,7 +69,10 @@
     function PrivateMapModel(opts) {
       
       var _instance = null,
+        _directionsDisplay = null,
+        _directionsService = null,
         _markers = [],  // caches the instances of google.maps.Marker
+        _waypoints = [],  // caches the instances of waypoints
         _handlers = [], // event handlers
         _windows = [],  // InfoWindow objects
         o = angular.extend({}, _defaults, opts),
@@ -76,7 +85,17 @@
       this.dragging = false;
       this.selector = o.container;
       this.markers = [];
+      this.waypoints = [];
       this.options = o.options;
+      this.origin = opts.origin;
+      this.destination = opts.destination;
+      this.travelMode = o.travelMode;
+      this.transitOptions = o.transitOptions;
+      this.unitSystem = o.unitSystem;
+      this.optimizeWaypoints = o.optimizeWaypoints;
+      this.provideRouteAlternatives = o.provideRouteAlternatives;
+      this.avoidHighways = o.avoidHighways;
+      this.avoidTolls = o.avoidTolls;
       
       this.draw = function () {
         
@@ -295,6 +314,59 @@
           v.setMap(null);
         });
       };
+
+      this.addWaypoint = function (location, latitude, longitude) {
+        if (that.findWaypoint(location) != null) {
+          return;
+        }
+
+        var waypoint = {
+                location: new google.maps.LatLng(latitude, longitude),
+                stopover: true
+              };
+              _waypoints.unshift(waypoint);
+              
+        // Cache instance of our marker for scope purposes
+        that.waypoints.unshift({ location: location, latitude: latitude, longitude: longitude });
+      }; 
+      
+      this.findWaypoint = function (location) {
+        for (var i = 0; i < that.waypoints.length; i++) {
+          var loc = that.waypoints[i].location;
+          
+          if (loc === location) {
+            return that.waypoints[i];
+          }
+        }
+        
+        return null;
+      };  
+
+      this.hasWaypoint = function (location) {
+        return that.findWaypoint(location) !== null;
+      }; 
+
+      this.updateRoute = function() {
+        if (_directionsDisplay == null) {
+          _directionsService = new google.maps.DirectionsService();
+          _directionsDisplay = new google.maps.DirectionsRenderer();
+          _directionsDisplay.setMap(_instance);
+        }
+
+        var request = {
+            origin: that.origin,
+            destination: that.destination,
+            waypoints: _waypoints.slice(0,8),
+            optimizeWaypoints: true,
+            travelMode: that.travelMode
+        };
+        _directionsService.route(request, function(response, status) {
+          if (status == google.maps.DirectionsStatus.OK) {
+            _directionsDisplay.setDirections(response);
+          }
+          console.log(response);
+        });
+      };
     }
     
     // Done
@@ -333,12 +405,15 @@
       scope: {
         center: "=center", // required
         markers: "=markers", // optional
+        waypoints: "=waypoints", // optional
         latitude: "=latitude", // required
         longitude: "=longitude", // required
         zoom: "=zoom", // required
         refresh: "&refresh", // optional
         windows: "=windows", // optional
-        events: "=events"
+        events: "=events",
+        origin: "=origin",
+        destination: "=destination"
       },
       controller: controller,      
       link: function (scope, element, attrs, ctrl) {
@@ -520,6 +595,24 @@
           });
           
         }, true);
+
+        // waypoints
+        scope.$watch("waypoints", function (newValue, oldValue) {
+          
+          $timeout(function () {
+            if (newValue == null || newValue.length < 1)
+              return;
+
+            angular.forEach(newValue, function (v, i) {
+              if (!_m.hasWaypoint(v.location)) {
+                _m.addWaypoint(v.location, v.latitude, v.longitude);
+              }
+            });
+
+            _m.updateRoute();
+          });
+          
+        }, true);
         
         
         // Update map when center coordinates change
@@ -542,6 +635,16 @@
           
           _m.zoom = newValue;
           _m.draw();
+        });
+
+        scope.$watch("origin", function (newValue, oldValue) {
+          _m.origin = new google.maps.LatLng(newValue.latitude, 
+                newValue.longitude);  
+        });
+
+        scope.$watch("destination", function (newValue, oldValue) {
+          _m.destination = new google.maps.LatLng(newValue.latitude, 
+                newValue.longitude);  
         });
       }
     };

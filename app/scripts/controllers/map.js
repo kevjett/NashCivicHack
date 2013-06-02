@@ -13,26 +13,20 @@ angular.module('NashCivicHackApp')
 	        longitude: -86.783333
 	      }
 	    },
-		
-		/** the initial center of the map */
-		//centerProperty: {
-		//	latitude: 36.149862,
-		//	longitude: -86.813458
-		//},
+		originProperty: {
+	        latitude: 36.166667,
+	        longitude: -86.783333
+	      },
+	      destinationProperty: {
+	      	latitude: 36.125816,
+	      	longitude: -86.665735
+	      },
 		
 		/** the initial zoom level of the map */
 		zoomProperty: 14,
 		
 		/** list of markers to put in the map */
 		markersProperty: [],
-		 /*{
-				latitude: 36.149862,
-				longitude: -86.813458
-			},
-			{
-				latitude: 36.136887,
-				longitude: -86.806213
-			}],*/
 		
 		// These 2 properties will be set when clicking on the map
 		clickedLatitudeProperty: null,	
@@ -137,6 +131,18 @@ angular.module('NashCivicHackApp')
 			longitude: parseFloat(item.Longitude),
 			infoWindow: content.join('')
 		});	
+
+    	if ($routeParams.route != null) {
+    		if (!$scope.waypointsProperty) {
+    			$scope.waypointsProperty = [];
+    		}
+    		$scope.waypointsProperty.push({
+	    		location: item.Location,
+				latitude: parseFloat(item.Latitude),
+				longitude: parseFloat(item.Longitude)
+			});	
+    	}
+
 		console.log({
 			latitude: parseFloat(item.Latitude),
 			longitude: parseFloat(item.Longitude)
