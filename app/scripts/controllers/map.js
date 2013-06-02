@@ -1,6 +1,6 @@
 'use strict';
 angular.module('NashCivicHackApp')
-  .controller('MapsCtrl', ['$scope','$timeout','$log','$http','$routeParams', function ($scope, $timeout, $log, $http,$routeParams) {
+  .controller('MapsCtrl', ['$scope','$timeout','$log','$http','$stateParams', function ($scope, $timeout, $log, $http,$stateParams) {
 	// Enable the new Google Maps visuals until it gets enabled by default.
     // See http://googlegeodevelopers.blogspot.ca/2013/05/a-fresh-new-look-for-maps-api-for-all.html
 	google.maps.visualRefresh = true;
@@ -132,7 +132,7 @@ angular.module('NashCivicHackApp')
 			infoWindow: content.join('')
 		});	
 
-    	if ($routeParams.route != null) {
+    	if ($stateParams.route != null) {
     		if (!$scope.waypointsProperty) {
     			$scope.waypointsProperty = [];
     		}
@@ -149,8 +149,8 @@ angular.module('NashCivicHackApp')
 		});
 	};
 
-	if ($routeParams.id != null) {
-		$http({method: 'GET', url: '/data/' + $routeParams.id}).
+	if ($stateParams.id != null) {
+		$http({method: 'GET', url: '/data/' + $stateParams.id}).
 		  success(function(data, status, headers, config) {
 		    console.log('success');
 		    console.log(data);
@@ -169,8 +169,8 @@ angular.module('NashCivicHackApp')
 
 			$scope.position.coords = $scope.markersProperty[0];	
 		  });
-	} else if ($routeParams.col != null && $routeParams.search != null) {
-		$http({method: 'GET', url: '/data/' + $routeParams.col + '/' + $routeParams.search }).
+	} else if ($stateParams.col != null && $stateParams.search != null) {
+		$http({method: 'GET', url: '/data/' + $stateParams.col + '/' + $stateParams.search }).
 		  success(function(data, status, headers, config) {
 		    console.log('success');
 		    console.log(data);

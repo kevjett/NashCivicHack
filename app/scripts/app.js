@@ -40,7 +40,7 @@ app.config([
 			})
 			.state({
 				name:'maps',
-				url:'/maps',
+				url:'/maps?col&search&id&route',
 				templateUrl: 'views/maps.html',
 				controller: 'MapsCtrl'
 			});
