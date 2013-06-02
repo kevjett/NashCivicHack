@@ -29,16 +29,17 @@ exports.findAll = function(req, res) {
 };
 
 exports.findById = function(req, res) {
-	var rtn = null;
+	var rtn = [];
+	var ids = req.params.id.split(',');
 	getData().on('record', function(row,index){
-  		if (row.AIPPID === req.params.id) {
-  			rtn = row;
-  		}
+		for (var i = ids.length - 1; i >= 0; i--) {
+			if (row.AIPPID === ids[i]) {
+	  			rtn.push(row);
+	  		}
+		};
 	}).on('end', function(count) {
-		if (rtn != null) {
-			rtn.success = true;
-			rtn.code = 200;
-			res.send(rtn);
+		if (rtn.length > 0) {
+			res.send(returnList(rtn));
 		} else {
 			res.send({error:'item not found', code:404, id:req.params.id, success:false});
 		}

@@ -131,8 +131,10 @@ angular.module('NashCivicHackApp')
 			longitude: parseFloat(item.Longitude),
 			infoWindow: content.join('')
 		});	
+	};
 
-    	if ($stateParams.route != null) {
+	var addWaypoint = function(item) {
+		if ($stateParams.route != null) {
     		if (!$scope.waypointsProperty) {
     			$scope.waypointsProperty = [];
     		}
@@ -142,72 +144,33 @@ angular.module('NashCivicHackApp')
 				longitude: parseFloat(item.Longitude)
 			});	
     	}
-
-		console.log({
-			latitude: parseFloat(item.Latitude),
-			longitude: parseFloat(item.Longitude)
-		});
 	};
 
+	var addMapData = function(data) {
+		if (data.success == null || data.success == false){
+	    	alert(data.error);
+	    	return;
+	    }
+
+	    for(var i = 0;i < data.list.length;i++) {
+	    	var item = data.list[i];
+	    	addPoint(item,data.list);
+	    	addWaypoint(item);
+	    }
+
+	    if ($scope.markersProperty.length == 1)
+			$scope.position.coords = $scope.markersProperty[0];
+	};
+
+	var url = '/data';
 	if ($stateParams.id != null) {
-		$http({method: 'GET', url: '/data/' + $stateParams.id}).
-		  success(function(data, status, headers, config) {
-		    console.log('success');
-		    console.log(data);
-		    
-		    if (data.success == null || data.success == false){
-		    	alert(data.error);
-		    	return;
-		    }
-
-		    addPoint(data);
-
-		    if (!data.Latitude || !data.Longitude){
-		    	alert('Item does not have coordinates.');
-		    	return;
-		    }
-
-			$scope.position.coords = $scope.markersProperty[0];	
-		  });
+		url = '/data/' + $stateParams.id;
 	} else if ($stateParams.col != null && $stateParams.search != null) {
-		$http({method: 'GET', url: '/data/' + $stateParams.col + '/' + $stateParams.search }).
-		  success(function(data, status, headers, config) {
-		    console.log('success');
-		    console.log(data);
-		    
-		    if (data.success == null || data.success == false){
-		    	alert(data.error);
-		    	return;
-		    }
-
-		    for(var i = 0;i < data.list.length;i++) {
-		    	var item = data.list[i];
-		    	addPoint(item,data.list);
-		    }
-
-		    if ($scope.markersProperty.length == 1)
-				$scope.position.coords = $scope.markersProperty[0];
-		  });
-	} else {
-		$http({method: 'GET', url: '/data'}).
-		  success(function(data, status, headers, config) {
-		    console.log('success');
-		    console.log(data);
-		    
-		    if (data.success == null || data.success == false){
-		    	alert(data.error);
-		    	return;
-		    }
-
-		    for(var i = 0;i < data.list.length;i++) {
-		    	var item = data.list[i];
-		    	addPoint(item,data.list);
-		    }
-
-		    if ($scope.markersProperty.length == 1)
-				$scope.position.coords = $scope.markersProperty[0];
-		  });
+		url = '/data/' + $stateParams.col + '/' + $stateParams.search;
 	}
 
-  	
+	$http({method: 'GET', url: url }).
+	  success(function(data, status, headers, config) {
+	    addMapData(data);
+	  });
   }]);
