@@ -1,0 +1,138 @@
+/*
+* Skeleton V1.2
+* Copyright 2011, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 6/20/2012
+*/
+
+/* Table of Content
+==================================================
+	#Site Styles
+	#Page Styles
+	#Media Queries
+	#Font-Face */
+
+/* #Site Styles
+================================================== */
+
+html,
+body {
+	height: 100%;
+}
+
+.page,
+.google-map {
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+}
+
+.panels {
+	position:relative;
+	width: 100%;
+	height: 100%;
+}
+
+.panel {
+	position:absolute;
+	top: 0;
+	height: 100%;
+	background-color: #fff;
+	box-shadow:0 0 4px 2px rgba(0,0,0,0.4);
+
+	&> header {
+		background-color: #def;
+		padding: 6px;
+
+		menu {
+			float: right;
+		}
+
+		h1,
+		menu,
+		button {
+			margin: 0;
+		}
+
+		.abstract {
+			float:left;
+		}
+
+		&:before,
+		&:after {
+			content: ' ';
+			display:table;
+			clear:both;
+		}
+
+	}
+}
+
+.panel-abstract {
+	left: 0;
+	width: 80px;
+	background-color:#444;
+	z-index: 0;
+}
+
+.panel-main {
+	left: 80px;
+	width: 270px;
+	z-index: 1;
+}
+
+.panel-detail {
+	left: 350px;
+	right: 0;
+	z-index: 3;
+}
+
+
+
+/* #Page Styles
+================================================== */
+
+.schedule {
+	margin: 0;
+}
+
+/* #Media Queries
+================================================== */
+
+	/* Smaller than standard 960 (devices and browsers) */
+	@media only screen and (max-width: 959px) {}
+
+	/* Tablet Portrait size to standard 960 (devices and browsers) */
+	@media only screen and (min-width: 768px) and (max-width: 959px) {}
+
+	/* All Mobile Sizes (devices and browser) */
+	@media only screen and (max-width: 767px) {}
+
+	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+	@media only screen and (min-width: 480px) and (max-width: 767px) {}
+
+	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+	@media only screen and (max-width: 479px) {}
+
+
+/* #Font-Face
+================================================== */
+/* 	This is the proper syntax for an @font-face file
+		Just create a "fonts" folder at the root,
+		copy your FontName into code below and remove
+		comment brackets */
+
+/*	@font-face {
+		font-family: 'FontName';
+		src: url('../fonts/FontName.eot');
+		src: url('../fonts/FontName.eot?iefix') format('eot'),
+			 url('../fonts/FontName.woff') format('woff'),
+			 url('../fonts/FontName.ttf') format('truetype'),
+			 url('../fonts/FontName.svg#webfontZam02nTh') format('svg');
+		font-weight: normal;
+		font-style: normal; }
+*/

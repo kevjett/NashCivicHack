@@ -1,0 +1,29 @@
+
+<header>
+
+	<menu type="toolbar" class="abstract">
+		<button type="button">
+			<i class="icon-arrow-left"></i>
+		</button>
+	</menu>
+
+	<h1>Schedule</h1>
+
+</header>
+
+<ol class="schedule">
+	<li data-ng-repeat="stop in plan.stops">
+
+		<time class="{{ stop.time | date:'iso' }}">{{ stop.time | date:'short' }}</time>
+
+		<menu type="toolbar">
+			<button><i class="icon-check"></i></button>
+			<button><i class="icon-cross"></i></button>
+		</menu>
+
+		<div class="card">
+				<h2>{{ stop.title }}</h2>
+		</div>
+
+	</li>
+</ol>
