@@ -18,6 +18,9 @@ app.config([
 				name:'app.view',
 				url:'',
 				views: {
+					main: {
+						templateUrl: 'views/no-schedule.html'
+					},
 					abstract: {
 						templateUrl: 'views/plans.html',
 						controller: 'PlansCtrl'

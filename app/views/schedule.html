@@ -49,13 +49,12 @@
 
 			<ol>
 				<li data-ng-repeat="point in step.points">
-					<div style="font-weight:bold;font-size:1.3em;">{{ point.Title }}</div>
-					<div style="font-size:0.9em;"><i>{{ point.Subject }}</i></div>
-					<div><strong>Type: </strong>{{ point.Type }}</div>
-					<div><strong>Medium: </strong>{{ point.Medium }}</div>
-					<div><strong>Artist(s): </strong>{{ point['Artist(s)'] }}</div>
-					<div><strong>Owner: </strong>{{ point.Owner }}</div>
-					<div><strong>Remarks: </strong>{{ point.Remarks }}</div>
+					<div data-ng-show="point.Title" style="font-weight:bold;font-size:1.3em;">{{ point.Title }}</div>
+					<p data-ng-show="point.Subject" style="font-size:0.9em;line-height:1.5em;"><i>{{ point.Subject }}</i></p>
+					<div data-ng-show="point.Type"><strong>Type: </strong>{{ point.Type }}</div>
+					<div data-ng-show="point.Medium"><strong>Medium: </strong>{{ point.Medium }}</div>
+					<div data-ng-show="point['Artist(s)']"><strong>Artist(s): </strong>{{ point['Artist(s)'] }}</div>
+					<div data-ng-show="point.Owner"><strong>Owner: </strong>{{ point.Owner }}</div>
 				</li>
 			</ol>
 		</div>

@@ -1177,49 +1177,62 @@ body {
 /* line 145, skeleton/_layout.scss */
 .panel-abstract {
   left: 0;
-  width: 200px;
+  width: 320px;
   background-color: #eee;
   z-index: 0;
 }
 
 /* line 152, skeleton/_layout.scss */
 .panel-main {
-  left: 200px;
-  width: 400px;
+  left: 320px;
+  width: 320px;
   z-index: 1;
 }
 
 /* line 158, skeleton/_layout.scss */
 .panel-detail {
-  left: 600px;
+  left: 640px;
   right: 0;
   z-index: 3;
 }
 
+/* line 163, skeleton/_layout.scss */
+.no-sched {
+  text-align: center;
+}
+/* line 166, skeleton/_layout.scss */
+.no-sched p {
+  margin: auto;
+  display: block;
+  margin: 0;
+  text-align: center;
+  color: #999;
+}
+
 /* #Page Styles
 ================================================== */
-/* line 169, skeleton/_layout.scss */
+/* line 179, skeleton/_layout.scss */
 .plans {
   margin: 0;
   position: relative;
   height: 100%;
 }
-/* line 174, skeleton/_layout.scss */
+/* line 184, skeleton/_layout.scss */
 .plans > li {
   margin: 0;
   display: block;
 }
-/* line 178, skeleton/_layout.scss */
+/* line 188, skeleton/_layout.scss */
 .plans > li img {
   display: block;
 }
-/* line 182, skeleton/_layout.scss */
+/* line 192, skeleton/_layout.scss */
 .plans > li > a {
   display: block;
   padding: 0;
   text-decoration: none;
 }
-/* line 188, skeleton/_layout.scss */
+/* line 198, skeleton/_layout.scss */
 .plans > li h2 {
   background-color: #333;
   color: #fff;
@@ -1228,18 +1241,18 @@ body {
   padding: 4px;
 }
 
-/* line 198, skeleton/_layout.scss */
+/* line 208, skeleton/_layout.scss */
 .schedule {
   margin: 0;
   position: relative;
   height: 100%;
 }
-/* line 203, skeleton/_layout.scss */
+/* line 213, skeleton/_layout.scss */
 .schedule > li {
   margin: 0;
   position: relative;
 }
-/* line 208, skeleton/_layout.scss */
+/* line 218, skeleton/_layout.scss */
 .schedule:before {
   content: '';
   display: block;
@@ -1250,14 +1263,19 @@ body {
   border-left: 2px solid rgba(0, 0, 0, 0.05);
 }
 
-/* line 222, skeleton/_layout.scss */
+/* line 232, skeleton/_layout.scss */
 .commute .card,
 .stop .card {
   margin-left: 40px;
   border-left: 2px solid #ccc;
   padding: 6px;
 }
-/* line 228, skeleton/_layout.scss */
+/* line 238, skeleton/_layout.scss */
+.commute ol,
+.stop ol {
+  margin-left: 19px;
+}
+/* line 242, skeleton/_layout.scss */
 .commute > time,
 .stop > time {
   font-family: Ubuntu Condensed, Ubuntu, sans-serif;
@@ -1272,31 +1290,32 @@ body {
   font-weight: bold;
 }
 
-/* line 244, skeleton/_layout.scss */
+/* line 258, skeleton/_layout.scss */
 .stop .card {
   border-color: #a0cf67;
   background-color: #f4f4f4;
 }
-/* line 252, skeleton/_layout.scss */
+/* line 266, skeleton/_layout.scss */
 .stop.locked .card {
   border-color: #c00;
 }
-/* line 257, skeleton/_layout.scss */
+/* line 271, skeleton/_layout.scss */
 .stop h2 {
   font-weight: 500;
   margin-bottom: 0;
 }
-/* line 262, skeleton/_layout.scss */
+/* line 276, skeleton/_layout.scss */
 .stop p {
   color: #999;
   font-size: 0.8em;
   margin-top: 0;
+  margin-bottom: 4px;
 }
-/* line 268, skeleton/_layout.scss */
+/* line 283, skeleton/_layout.scss */
 .stop menu {
   display: block;
 }
-/* line 273, skeleton/_layout.scss */
+/* line 288, skeleton/_layout.scss */
 .stop menu button,
 .stop menu button:hover,
 .stop menu button:active {
@@ -1304,7 +1323,7 @@ body {
   font-size: 12px;
 }
 
-/* line 282, skeleton/_layout.scss */
+/* line 297, skeleton/_layout.scss */
 .commute .card {
   text-align: center;
   border-color: #ffd24f;

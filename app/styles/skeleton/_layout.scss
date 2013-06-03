@@ -144,23 +144,33 @@ body {
 
 .panel-abstract {
 	left: 0;
-	width: 200px;
+	width: 320px;
 	background-color:#eee;
 	z-index: 0;
 }
 
 .panel-main {
-	left: 200px;
-	width: 400px;
+	left: 320px;
+	width: 320px;
 	z-index: 1;
 }
 
 .panel-detail {
-	left: 600px;
+	left: 640px;
 	right: 0;
 	z-index: 3;
 }
+.no-sched {
+	text-align: center;
 
+	p {
+		margin: auto;
+		display:block;
+		margin:0;
+		text-align:center;
+		color:#999;
+	}
+}
 
 
 /* #Page Styles
@@ -225,6 +235,10 @@ body {
 		padding: 6px;
 	}
 
+	ol {
+		margin-left: 19px;
+	}
+
 	&> time {
 		font-family: Ubuntu Condensed, Ubuntu, sans-serif;
 		position: absolute;
@@ -263,6 +277,7 @@ body {
 		color: #999;
 		font-size: 0.8em;
 		margin-top: 0;
+		margin-bottom: 4px;
 	}
 
 	menu {
